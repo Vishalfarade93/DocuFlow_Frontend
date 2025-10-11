@@ -49,8 +49,8 @@ export default function SearchFilter({
         <option value="All Status">All Status</option>
         <option value="DRAFT">Draft</option>
         <option value="SUBMITTED">Submitted</option>
-        <option value="UNDER_REVIEW">Under Review</option>
-        <option value="REUPLOAD">Reupload</option>
+        <option value="CHANGES_REQUESTED">Changes Requested</option>
+        <option value="FORWARDED">Forwarded for Approval</option>
         <option value="APPROVED">Approved</option>
         <option value="REJECTED">Rejected</option>
       </select>

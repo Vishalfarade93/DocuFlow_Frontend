@@ -1,19 +1,16 @@
 import { useState } from 'react';
 import { Eye, ChevronLeft, ChevronRight } from 'lucide-react';
 
-export default function ReviewerDocumentTable({ documents, onViewDocument }) {
+export default function ApproverDocumentTable({ documents, onViewDocument }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 7;
 
   const getStatusColor = (status) => {
     switch (status?.toUpperCase()) {
-      case 'PENDING_REVIEW':
-      case 'PENDING REVIEW':
-        return '#DBEAFE';
-      case 'CHANGES_REQUESTED':
-      case 'CHANGES REQUESTED':
+      case 'PENDING_APPROVAL':
+      case 'PENDING APPROVAL':
         return '#FEF3C7';
-      case 'FORWARDED':
+      case 'APPROVED':
         return '#D1FAE5';
       case 'REJECTED':
         return '#FEE2E2';
@@ -22,24 +19,12 @@ export default function ReviewerDocumentTable({ documents, onViewDocument }) {
     }
   };
 
-  const formatDate = (dateString) => {
-    const date = new Date(dateString);
-    return date.toLocaleString('en-US', {
-      day: '2-digit',
-      month: 'short',
-      year: 'numeric',
-    });
-  }; 
-
   const getStatusTextColor = (status) => {
     switch (status?.toUpperCase()) {
-      case 'PENDING_REVIEW':
-      case 'PENDING REVIEW':
-        return '#1E40AF';
-      case 'CHANGES_REQUESTED':
-      case 'CHANGES REQUESTED':
+      case 'PENDING_APPROVAL':
+      case 'PENDING APPROVAL':
         return '#92400E';
-      case 'FORWARDED':
+      case 'APPROVED':
         return '#065F46';
       case 'REJECTED':
         return '#991B1B';
@@ -65,6 +50,16 @@ export default function ReviewerDocumentTable({ documents, onViewDocument }) {
     const years = Math.floor(months / 12);
     return `${years} years ago`;
   };
+
+  const formatDate = (dateString) => {
+    if (!dateString) return 'N/A';
+    const date = new Date(dateString);
+    return date.toLocaleString('en-US', {
+      day: '2-digit',
+      month: 'short',
+      year: 'numeric',
+    });
+  }; 
 
   // Pagination calculations
   const totalPages = Math.ceil(documents.length / itemsPerPage);
@@ -112,7 +107,16 @@ export default function ReviewerDocumentTable({ documents, onViewDocument }) {
                 fontWeight: '600',
                 color: '#6B7280'
               }}>
-                Submission Date
+                Forwarded By
+              </th>
+              <th style={{
+                padding: '16px',
+                textAlign: 'left',
+                fontSize: '13px',
+                fontWeight: '600',
+                color: '#6B7280'
+              }}>
+                Forwarded Date
               </th>
               <th style={{
                 padding: '16px',
@@ -147,14 +151,17 @@ export default function ReviewerDocumentTable({ documents, onViewDocument }) {
                     {doc.title}
                   </div>
                   <div style={{ fontSize: '13px', color: '#9CA3AF' }}>
-                    {doc.fileName}
+                    {doc.filename}
                   </div>
                 </td>
                 <td style={{ padding: '16px', fontSize: '14px', color: '#1F2937' }}>
                   {doc.owner}
                 </td>
+                <td style={{ padding: '16px', fontSize: '14px', color: '#1F2937' }}>
+                  {doc.reviewedBy}
+                </td>
                 <td style={{ padding: '16px', fontSize: '14px', color: '#6B7280' }}>
-                  {formatDate(doc.submittedAt)}
+                  {formatDate(doc.forwardedAt)}
                 </td>
                 <td style={{ padding: '16px' }}>
                   <span style={{
@@ -170,7 +177,7 @@ export default function ReviewerDocumentTable({ documents, onViewDocument }) {
                 </td>
                 <td style={{ padding: '16px' }}>
                   <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
-                    {doc.status && (
+                  
                       <button
                         onClick={() => onViewDocument(doc)}
                         style={{
@@ -184,7 +191,8 @@ export default function ReviewerDocumentTable({ documents, onViewDocument }) {
                       >
                         <Eye size={18} />
                       </button>
-                    )}
+           
+                    
                   </div>
                 </td>
               </tr>

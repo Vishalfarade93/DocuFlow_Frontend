@@ -8,6 +8,7 @@ import UploadDocument from './Submitter/UploadDocument';
 import ViewDocument from './Submitter/ViewDocument';
 import EditDocument from './Submitter/EditDocument';
 import DeleteDocumentModal from './Submitter/DeleteDocumentModal';
+import Footer from './Footer';
 
 function SubmitterPage() {
   const navigate = useNavigate();
@@ -31,6 +32,7 @@ const [documentToDelete, setDocumentToDelete] = useState(null);
   const fetchDocuments = async () => {
     setLoading(true);
     setError('');
+     await new Promise((resolve) => setTimeout(resolve, 1300));
     try {
       const res = await fetch('http://localhost:9191/submit/my', {
         credentials: 'include'
@@ -45,7 +47,13 @@ const [documentToDelete, setDocumentToDelete] = useState(null);
       }
 
       const data = await res.json();
-      setDocuments(data);
+      
+       const mappedDocs = data.map((doc) => ({
+      ...doc,
+      status: doc.status === 'APPROVER_REJECTED' ? 'REJECTED' : doc.status
+    }));
+
+    setDocuments(mappedDocs);
     } catch (err) {
       console.error('Error fetching documents:', err);
       setError('Failed to load documents. Please try again.');
@@ -66,7 +74,7 @@ const [documentToDelete, setDocumentToDelete] = useState(null);
     underReview: documents.filter(d => d.status === 'FORWARDED').length,
     reupload: documents.filter(d => d.status === 'CHANGES_REQUESTED').length,
     approved: documents.filter(d => d.status === 'APPROVED').length,
-    rejected: documents.filter(d => d.status === 'REJECTED').length
+    rejected: documents.filter(d => d.status === 'REJECTED').length 
   };
 
   // --- Filtering ---
@@ -127,7 +135,10 @@ const [documentToDelete, setDocumentToDelete] = useState(null);
         />
 
         {loading ? (
-          <p style={{ textAlign: 'center' }}>Loading documents...</p>
+          <div  style={{display:'flex',justifyContent:'center',alignItems:'center'}}>
+
+        {loading && <img src='https://i.pinimg.com/originals/9f/97/18/9f97187c5333792fe39ed8df9d61a9f7.gif' style={{height:'200px', width:'200px',marginTop:'50px'}} alt='Loding....'></img>}
+        </div>
         ) : error ? (
           <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>
         ) : (
@@ -192,6 +203,7 @@ const [documentToDelete, setDocumentToDelete] = useState(null);
           }}
         />
       )}
+      <Footer />
     </div>
   );
 }

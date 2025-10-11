@@ -303,7 +303,7 @@ export default function ViewDocumentModal({ doc, onClose, onUpload }) {
                     letterSpacing: "0.5px",
                   }}
                 >
-                  <Calendar size={14} />
+                  <Clock size={14} />
                   Submitted at
                 </div>
                 <div
@@ -351,6 +351,120 @@ export default function ViewDocumentModal({ doc, onClose, onUpload }) {
                   {formatDate(doc.updatedAt) || "N/A"}
                 </div>
               </div>
+              {doc.forwardedAt !== null && (
+                <div
+                  style={{
+                    padding: "16px",
+                    backgroundColor: "#F9FAFB",
+                    borderRadius: "10px",
+                    border: "1px solid #E5E7EB",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "8px",
+                      fontSize: "12px",
+                      color: "#6B7280",
+                      marginBottom: "8px",
+                      textTransform: "uppercase",
+                      fontWeight: "600",
+                      letterSpacing: "0.5px",
+                    }}
+                  >
+                    <Clock size={14} />
+                    Forwarded At
+                  </div>
+                  <div
+                    style={{
+                      fontSize: "15px",
+                      fontWeight: "600",
+                      color: "#1F2937",
+                    }}
+                  >
+                    {formatDate(doc.forwardedAt) || "N/A"}
+                  </div>
+                </div>
+              )}
+
+              {doc.approvedBy && (
+              <div
+                style={{
+                  padding: "16px",
+                  backgroundColor: "#F9FAFB",
+                  borderRadius: "10px",
+                  border: "1px solid #E5E7EB",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    fontSize: "12px",
+                    color: "#6B7280",
+                    marginBottom: "8px",
+                    textTransform: "uppercase",
+                    fontWeight: "600",
+                    letterSpacing: "0.5px",
+                  }}
+                >
+                  <User size={14} />
+               Approved By
+                </div>
+                <div
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "600",
+                    color: "#1F2937",
+                  }}
+                >
+                  <div style={{ color: "#555556ff", marginBottom: "4px" }}>{doc.approvedBy || "N/A"}</div>
+                  {formatDate(doc.approvedAt) || "N/A"}
+                </div>
+              </div>
+              )}
+
+
+                      {doc.rejectedAt && (
+              <div
+                style={{
+                  padding: "16px",
+                  backgroundColor: "#F9FAFB",
+                  borderRadius: "10px",
+                  border: "1px solid #E5E7EB",
+                }}
+              >
+                <div
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    gap: "8px",
+                    fontSize: "12px",
+                    color: "#6B7280",
+                    marginBottom: "8px",
+                    textTransform: "uppercase",
+                    fontWeight: "600",
+                    letterSpacing: "0.5px",
+                  }}
+                >
+                  <Clock size={14} />
+               Rejected By
+                </div>
+                <div
+                  style={{
+                    fontSize: "15px",
+                    fontWeight: "600",
+                    color: "#1F2937",
+                  }}
+                >
+                   <div style={{ color: "#555556ff", marginBottom: "4px" }}>{doc.rejectedBy || "N/A"}</div>
+                  {formatDate(doc.rejectedAt) || "N/A"}
+                </div>
+              </div>
+              )}
+
             </div>
           </div>
 

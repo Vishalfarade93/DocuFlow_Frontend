@@ -4,9 +4,9 @@ import ReviewerSearchFilter from './Reviewer/ReviewerSearchFilter';
 import ReviewerDocumentTable from './Reviewer/ReviewerDocumentTable';
 import ReviewerStatsCard from './Reviewer/StatsCard';
 import ReviewerHeader from './Reviewer/ReviewerHeader';
-
 import { useNavigate } from 'react-router-dom';
 import ViewDocumentModal from './Reviewer/ViewDocumentModal';
+import Footer from './Footer';
 
 export default function ReviewerPage() {
   const navigate = useNavigate();
@@ -15,10 +15,13 @@ export default function ReviewerPage() {
   const [statusFilter, setStatusFilter] = useState('All Status');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [selectedDocument, setSelectedDocument] = useState(null); 
+  const [selectedDocument, setSelectedDocument] = useState(null);
 
   const fetchDocuments = async () => {
     setLoading(true);
+    setError('');
+    await new Promise((resolve) => setTimeout(resolve, 1300));
+
     try {
       const res = await fetch('http://localhost:9191/review/me', {
         credentials: 'include',
@@ -29,7 +32,7 @@ export default function ReviewerPage() {
           navigate('/login', { replace: true });
           return;
         }
-        throw new Error('Failed to fetch reviewer documents');
+        throw new Error(`Failed to fetch: ${res.status}`);
       }
 
       const data = await res.json();
@@ -53,7 +56,7 @@ export default function ReviewerPage() {
 
       setDocuments(mappedDocs);
     } catch (err) {
-      console.error(err);
+      console.error('Error fetching reviewer documents:', err);
       setError('Unable to fetch reviewer documents.');
     } finally {
       setLoading(false);
@@ -98,12 +101,11 @@ export default function ReviewerPage() {
   };
 
   // ✅ Handlers for modal
-  const handleOpenModal = (doc) =>{
-    
+  const handleOpenModal = (doc) => {
     setSelectedDocument(doc);
     console.log(doc);
-  } 
-    const handleCloseModal = () => setSelectedDocument(null);
+  };
+  const handleCloseModal = () => setSelectedDocument(null);
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#F9FAFB' }}>
@@ -135,11 +137,25 @@ export default function ReviewerPage() {
           onStatusChange={setStatusFilter}
         />
 
-        {/* Table Section */}
-        <ReviewerDocumentTable
-          documents={filteredDocuments}
-          onViewDocument={handleOpenModal} 
-        />
+        {/* ✅ Loading & Error Handling (added same as SubmitterPage) */}
+        {loading ? (
+          <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            {loading && (
+              <img
+                src="https://i.pinimg.com/originals/9f/97/18/9f97187c5333792fe39ed8df9d61a9f7.gif"
+                style={{ height: '200px', width: '200px', marginTop: '50px' }}
+                alt="Loading..."
+              />
+            )}
+          </div>
+        ) : error ? (
+          <p style={{ color: 'red', textAlign: 'center' }}>{error}</p>
+        ) : (
+          <ReviewerDocumentTable
+            documents={filteredDocuments}
+            onViewDocument={handleOpenModal}
+          />
+        )}
       </div>
 
       {/* ✅ View Modal */}
@@ -153,6 +169,7 @@ export default function ReviewerPage() {
           }}
         />
       )}
+      <Footer />
     </div>
   );
 }
