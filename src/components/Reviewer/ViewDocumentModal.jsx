@@ -71,8 +71,8 @@ export default function ViewDocumentModal({ doc, onClose, onUpload }) {
     }
 
     const data = new FormData();
-    data.append("comment", comment);
     data.append("action", action);
+    data.append("comment", comment);
 
     try {
       const response = await axios.put(
@@ -859,7 +859,7 @@ export default function ViewDocumentModal({ doc, onClose, onUpload }) {
             {isPending ? (
               <>
                 <button
-                  onClick={() => handleSubmit("changes requested")}
+                  onClick={() => handleSubmit("request_changes")}
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -886,7 +886,7 @@ export default function ViewDocumentModal({ doc, onClose, onUpload }) {
                 </button>
 
                 <button
-                  onClick={() => handleSubmit("rejected")}
+                  onClick={() => handleSubmit("reject")}
                   style={{
                     display: "flex",
                     alignItems: "center",
@@ -913,7 +913,7 @@ export default function ViewDocumentModal({ doc, onClose, onUpload }) {
                 </button>
 
                 <button
-                  onClick={() => handleSubmit("forwarded")}
+                  onClick={() => handleSubmit("forward")}
                   style={{
                     display: "flex",
                     alignItems: "center",

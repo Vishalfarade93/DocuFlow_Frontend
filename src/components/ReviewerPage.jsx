@@ -100,7 +100,7 @@ export default function ReviewerPage() {
     navigate('/login', { replace: true });
   };
 
-  // ✅ Handlers for modal
+  //  Handlers for modal
   const handleOpenModal = (doc) => {
     setSelectedDocument(doc);
     console.log(doc);
@@ -109,7 +109,7 @@ export default function ReviewerPage() {
 
   return (
     <div style={{ minHeight: '100vh', backgroundColor: '#F9FAFB' }}>
-      <ReviewerNavbar onLogout={handleLogout} />
+      <ReviewerNavbar onLogOut={handleLogout} />
 
       <div style={{ padding: '30px 130px' }}>
         <ReviewerHeader />
@@ -137,7 +137,7 @@ export default function ReviewerPage() {
           onStatusChange={setStatusFilter}
         />
 
-        {/* ✅ Loading & Error Handling (added same as SubmitterPage) */}
+        {/*  Loading & Error Handling */}
         {loading ? (
           <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
             {loading && (
@@ -158,7 +158,7 @@ export default function ReviewerPage() {
         )}
       </div>
 
-      {/* ✅ View Modal */}
+      {/*  View Modal */}
       {selectedDocument && (
         <ViewDocumentModal
           doc={selectedDocument}
