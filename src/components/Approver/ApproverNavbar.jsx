@@ -63,15 +63,15 @@ export default function ApproverNavbar({ onLogout }) {
           </div>
         </div>
 
-        {/* Right Section: Notification + Logout */}
+      
         <div style={{ display: 'flex', alignItems: 'center', gap: '20px', marginRight: '130px' }}>
-          {/* Notification Bell */}
+         
           <NotificationBell
             onClick={() => setShowNotificationPanel(!showNotificationPanel)}
             unreadCount={unreadCount}
           />
 
-          {/* Logout Button */}
+        
           <button
             style={{
               padding: '8px 16px',
@@ -92,7 +92,7 @@ export default function ApproverNavbar({ onLogout }) {
         </div>
       </div>
 
-      {/* Notification Panel */}
+    
       <NotificationPanel
         isOpen={showNotificationPanel}
         onClose={() => setShowNotificationPanel(false)}

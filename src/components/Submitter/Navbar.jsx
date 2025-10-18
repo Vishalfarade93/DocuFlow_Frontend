@@ -33,7 +33,7 @@ export default function Navbar({ onLogOut }) {
           padding: '0 130px'
         }}
       >
-        {/* Left Side - App Title & Username */}
+
         <div>
           <p style={{ marginBottom: '-10px', fontSize: '23px', marginTop: '10px', fontWeight: 'bold', color: '#000000ff' }}>
             DocuFlow

@@ -46,7 +46,7 @@ export default function ViewApprovalModal({ doc, onClose, onUpload }) {
   console.log(doc.status)
   const isPendingApproval = doc.status?.toUpperCase() === 'PENDING APPROVAL';
 
-  // API call function for approve/reject
+  
   const handleAction = async (actionType) => {
     try {
       setIsLoading(true);
@@ -72,7 +72,7 @@ export default function ViewApprovalModal({ doc, onClose, onUpload }) {
     }
   };
     
-  // Download handler
+  // Download 
    const handleDownload = async () => {
   try {
     const response = await fetch(`http://localhost:9191/approve/${doc.id}/download`, {
@@ -200,7 +200,6 @@ export default function ViewApprovalModal({ doc, onClose, onUpload }) {
           </button>
         </div>
 
-        {/* Scrollable Content */}
         <div style={{ flex: 1, overflowY: 'auto' }}>
           {/* Info Section */}
           <div style={{ padding: '24px', borderBottom: '1px solid #E5E7EB' }}>

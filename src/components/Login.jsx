@@ -61,7 +61,7 @@ function Login() {
       if (response.ok) {
         const data = await response.json();
         
-        // Store user info with authorities
+        // Store user info
         sessionStorage.setItem('user', JSON.stringify(data));
         sessionStorage.setItem('authenticated', 'true');
 

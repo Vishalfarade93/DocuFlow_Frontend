@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 export default function NotificationBell({ onClick, unreadCount }) {
   const [pulse, setPulse] = useState(false);
 
-  // Trigger pulse animation when unread count changes
+  // Trigger pulse animation
   useEffect(() => {
     if (unreadCount > 0) {
       setPulse(true);

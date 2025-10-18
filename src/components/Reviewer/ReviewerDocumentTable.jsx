@@ -66,7 +66,7 @@ export default function ReviewerDocumentTable({ documents, onViewDocument }) {
     return `${years} years ago`;
   };
 
-  // Pagination calculations
+  // Pagination 
   const totalPages = Math.ceil(documents.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -193,7 +193,7 @@ export default function ReviewerDocumentTable({ documents, onViewDocument }) {
         </table>
       </div>
 
-      {/* Pagination Controls */}
+      
       {totalPages > 1 && (
         <div style={{
           display: 'flex',

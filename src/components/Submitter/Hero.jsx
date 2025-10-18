@@ -35,7 +35,7 @@ export default function Hero({ stats, onUploadClick }) {
         </button>
       </div>
 
-      {/* Stats Cards Grid */}
+ 
       <div style={{ 
         display: 'grid', 
         gridTemplateColumns: 'repeat(7, 1fr)', 

@@ -33,7 +33,7 @@ export default function ReviewerNavbar({ onLogOut }) {
           padding: '0 130px'
         }}
       >
-        {/* Left Side - App Title & Username */}
+
         <div>
           <p
             style={{
@@ -94,7 +94,7 @@ export default function ReviewerNavbar({ onLogOut }) {
         </div>
       </div>
 
-      {/* Notification Panel */}
+ 
       <NotificationPanel
         isOpen={showNotificationPanel}
         onClose={() => setShowNotificationPanel(false)}

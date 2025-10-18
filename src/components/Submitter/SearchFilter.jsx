@@ -55,30 +55,7 @@ export default function SearchFilter({
         <option value="REJECTED">Rejected</option>
       </select>
       <div style={{ display: 'flex', gap: '4px' }}>
-        {/* <button
-          onClick={() => onViewChange('list')}
-          style={{
-            padding: '10px',
-            border: view === 'list' ? '2px solid #1F2937' : '1px solid #D1D5DB',
-            borderRadius: '8px',
-            backgroundColor: view === 'list' ? '#F3F4F6' : 'white',
-            cursor: 'pointer'
-          }}
-        >
-          <List size={18} />
-        </button>
-        <button
-          onClick={() => onViewChange('grid')}
-          style={{
-            padding: '10px',
-            border: view === 'grid' ? '2px solid #1F2937' : '1px solid #D1D5DB',
-            borderRadius: '8px',
-            backgroundColor: view === 'grid' ? '#F3F4F6' : 'white',
-            cursor: 'pointer'
-          }}
-        >
-          <Grid size={18} />
-        </button> */}
+       
       </div>
     </div>
   );

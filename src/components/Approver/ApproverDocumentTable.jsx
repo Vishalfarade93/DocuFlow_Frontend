@@ -61,7 +61,7 @@ export default function ApproverDocumentTable({ documents, onViewDocument }) {
     });
   }; 
 
-  // Pagination calculations
+  // Pagination 
   const totalPages = Math.ceil(documents.length / itemsPerPage);
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
@@ -201,7 +201,7 @@ export default function ApproverDocumentTable({ documents, onViewDocument }) {
         </table>
       </div>
 
-      {/* Pagination Controls */}
+    
       {totalPages > 1 && (
         <div style={{
           display: 'flex',
